@@ -1,5 +1,6 @@
-import HomePage from './components/pages/HomePage/index.js';
-import StoreProvider from './providers/StoreProvider';
+import StoreProvider from 'providers/StoreProvider';
+
+import HomePage from 'components/pages/HomePage';
 
 import './styles/globals.scss';
 

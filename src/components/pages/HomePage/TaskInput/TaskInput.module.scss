@@ -1,0 +1,16 @@
+.wrapper {
+  position: relative;
+  display: flex;
+}
+
+.btn {
+  position: absolute;
+  top: 55%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
+.root {
+  padding-left: 45px;
+  flex: 1 1 auto;
+}

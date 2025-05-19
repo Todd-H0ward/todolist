@@ -4,7 +4,7 @@ import taskSlice from './slices/taskSlice.js';
 
 const createStore = () => {
   const rootReducer = {
-    tasks: taskSlice,
+    task: taskSlice,
   };
 
   return configureStore({

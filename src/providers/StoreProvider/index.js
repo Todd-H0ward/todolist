@@ -1,1 +1,1 @@
-export { default } from './StoreProvider.jsx';
+export { default } from './StoreProvider';
