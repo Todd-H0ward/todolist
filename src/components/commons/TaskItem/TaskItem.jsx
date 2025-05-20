@@ -24,7 +24,7 @@ const TaskItem = ({ task, className }) => {
     <li className={clsx(styles.root, className)}>
       <Checkbox checked={task.isCompleted} onChange={onComplete} />
       <span className={task.isCompleted && styles.completed}>{task.title}</span>
-      <Button className={styles.deleteBtn} onClick={onDelete}>
+      <Button className={styles.deleteBtn} clear onClick={onDelete}>
         <Trash />
       </Button>
     </li>

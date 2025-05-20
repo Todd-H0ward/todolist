@@ -39,7 +39,7 @@ const TaskInput = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Button className={styles.btn} onClick={toggleAllTasks}>
+      <Button className={styles.btn} clear onClick={toggleAllTasks}>
         <ChevronDown />
       </Button>
       <Input
@@ -48,6 +48,7 @@ const TaskInput = () => {
         onChange={handleTaskTitleChange}
         onKeyDown={handleKeyDown}
         placeholder="What needs to be done?"
+        autoFocus
       />
     </div>
   );

@@ -2,12 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   tasks: [],
+  filter: 'all',
 };
 
 const taskSlice = createSlice({
   name: 'task',
   initialState,
   reducers: {
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
     addTask: (state, action) => {
       state.tasks.push(action.payload);
     },
@@ -28,9 +32,18 @@ const taskSlice = createSlice({
         task.isCompleted = !isAllCompleted;
       });
     },
+    removeCompleted: (state) => {
+      state.tasks = state.tasks.filter((task) => !task.isCompleted);
+    },
   },
 });
 
-export const { addTask, removeTask, toggleComplete, toggleAll } =
-  taskSlice.actions;
+export const {
+  setFilter,
+  addTask,
+  removeTask,
+  toggleComplete,
+  toggleAll,
+  removeCompleted,
+} = taskSlice.actions;
 export default taskSlice.reducer;
