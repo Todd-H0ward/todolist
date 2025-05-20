@@ -1,7 +1,7 @@
 .root {
   padding: 7px 13px;
   border-radius: 10px;
-  border: 2px solid var(--accent);
+  border: 2px solid var(--primary);
   cursor: pointer;
   transition:
     color 0.3s,
@@ -9,7 +9,7 @@
 
   &:hover {
     color: var(--white);
-    background-color: var(--accent);
+    background-color: var(--primary);
   }
 }
 
@@ -18,7 +18,7 @@
   border: none;
 
   &:hover {
-    color: var(--accent);
+    color: var(--primary);
     background-color: transparent;
   }
 }

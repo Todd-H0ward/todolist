@@ -55,6 +55,11 @@ export default [
               position: 'before',
             },
             {
+              pattern: '{store/**,**/store/**}',
+              group: 'internal',
+              position: 'before',
+            },
+            {
               pattern: '{hooks/**,**/hooks/**}',
               group: 'internal',
               position: 'before',

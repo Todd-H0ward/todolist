@@ -17,6 +17,7 @@ export default defineConfig({
       providers: resolve(__dirname, './src/providers'),
       store: resolve(__dirname, './src/store'),
       styles: resolve(__dirname, './src/styles'),
+      hooks: resolve(__dirname, './src/hooks'),
     },
   },
 });

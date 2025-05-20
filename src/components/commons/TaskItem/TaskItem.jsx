@@ -1,30 +1,49 @@
 import { clsx } from 'clsx';
 import { shape, string, bool } from 'prop-types';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { removeTask, toggleComplete } from 'store/slices/taskSlice.js';
 
 import Button from 'components/commons/Button';
 import Checkbox from 'components/commons/Checkbox';
 import { Trash } from 'components/icons';
 
+import { removeTask, toggleComplete } from 'store/slices/taskSlice.js';
+
+import useClickOutside from 'hooks/useClickOutside.js';
+
 import styles from './TaskItem.module.scss';
 
 const TaskItem = ({ task, className }) => {
   const dispatch = useDispatch();
+  const [isSelected, setIsSelected] = useState(false);
+  const checkboxRef = useRef(null);
 
-  const onDelete = () => {
+  const handleDelete = () => {
     dispatch(removeTask(task.id));
   };
 
-  const onComplete = () => {
+  const handleTaskClick = () => {
     dispatch(toggleComplete(task.id));
+    setIsSelected(true);
   };
 
+  const removeSelection = () => {
+    if (isSelected) {
+      setIsSelected(false);
+    }
+  };
+
+  useClickOutside(checkboxRef, removeSelection);
+
   return (
-    <li className={clsx(styles.root, className)}>
-      <Checkbox checked={task.isCompleted} onChange={onComplete} />
+    <li className={clsx(styles.root, isSelected && styles.selected, className)}>
+      <Checkbox
+        checked={task.isCompleted}
+        onChange={handleTaskClick}
+        ref={checkboxRef}
+      />
       <span className={task.isCompleted && styles.completed}>{task.title}</span>
-      <Button className={styles.deleteBtn} clear onClick={onDelete}>
+      <Button className={styles.deleteBtn} clear onClick={handleDelete}>
         <Trash />
       </Button>
     </li>

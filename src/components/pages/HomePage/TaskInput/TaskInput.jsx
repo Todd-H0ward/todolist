@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask, toggleAll } from 'store/slices/taskSlice';
 
 import Button from 'components/commons/Button/index.js';
 import Input from 'components/commons/Input';
 import { ChevronDown } from 'components/icons';
+
+import { addTask, toggleAll } from 'store/slices/taskSlice';
 
 import styles from './TaskInput.module.scss';
 
