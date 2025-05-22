@@ -1,8 +1,9 @@
 import { clsx } from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeCompleted, setFilter } from 'store/slices/taskSlice.js';
 
-import Button from 'components/commons/Button/index.js';
+import Button from 'components/commons/Button';
+
+import { removeCompleted, setFilter } from 'store/slices/taskSlice.js';
 
 import styles from './Controls.module.scss';
 

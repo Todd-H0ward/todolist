@@ -30,13 +30,28 @@
   }
 }
 
-.completed {
-  text-decoration: line-through;
-  color: #b1b1b1;
+.input {
+  padding: 5px;
+  flex: 1 1 auto;
+  border-width: 2px;
+  border-radius: 11px;
+}
+
+.title {
+  padding: 7px;
+  flex: 1 1 auto;
+
+  &[contenteditable='true'] {
+    outline: 1px solid var(--accent);
+  }
+
+  &.completed {
+    text-decoration: line-through;
+    color: #b1b1b1;
+  }
 }
 
 .deleteBtn {
-  margin-left: auto;
   opacity: 0;
   transition: opacity 0.3s;
 }

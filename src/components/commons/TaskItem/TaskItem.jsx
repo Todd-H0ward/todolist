@@ -5,9 +5,14 @@ import { useDispatch } from 'react-redux';
 
 import Button from 'components/commons/Button';
 import Checkbox from 'components/commons/Checkbox';
+import Input from 'components/commons/Input';
 import { Trash } from 'components/icons';
 
-import { removeTask, toggleComplete } from 'store/slices/taskSlice.js';
+import {
+  changeTaskTitle,
+  removeTask,
+  toggleComplete,
+} from 'store/slices/taskSlice.js';
 
 import useClickOutside from 'hooks/useClickOutside.js';
 
@@ -15,8 +20,11 @@ import styles from './TaskItem.module.scss';
 
 const TaskItem = ({ task, className }) => {
   const dispatch = useDispatch();
-  const [isSelected, setIsSelected] = useState(false);
   const checkboxRef = useRef(null);
+
+  const [isSelected, setIsSelected] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
+  const [taskTitle, setTaskTitle] = useState(task.title);
 
   const handleDelete = () => {
     dispatch(removeTask(task.id));
@@ -27,10 +35,29 @@ const TaskItem = ({ task, className }) => {
     setIsSelected(true);
   };
 
+  const handleTaskDoubleClick = () => {
+    setIsEditable(true);
+  };
+
+  const handleTitleChange = (e) => {
+    setTaskTitle(e.target.value);
+  };
+
   const removeSelection = () => {
     if (isSelected) {
       setIsSelected(false);
+      setIsEditable(false);
     }
+  };
+
+  const changeTitle = () => {
+    const newTitle = taskTitle.trim();
+
+    if (newTitle) {
+      dispatch(changeTaskTitle({ id: task.id, title: newTitle }));
+    }
+
+    setIsEditable(false);
   };
 
   useClickOutside(checkboxRef, removeSelection);
@@ -42,7 +69,24 @@ const TaskItem = ({ task, className }) => {
         onChange={handleTaskClick}
         ref={checkboxRef}
       />
-      <span className={task.isCompleted && styles.completed}>{task.title}</span>
+      {isEditable ? (
+        <Input
+          className={styles.input}
+          value={taskTitle}
+          onChange={handleTitleChange}
+          onBlur={changeTitle}
+          autoFocus
+        />
+      ) : (
+        <span
+          className={clsx(styles.title, task.isCompleted && styles.completed)}
+          contentEditable={isEditable}
+          onDoubleClick={handleTaskDoubleClick}
+          onBlur={changeTitle}
+        >
+          {task.title}
+        </span>
+      )}
       <Button className={styles.deleteBtn} clear onClick={handleDelete}>
         <Trash />
       </Button>

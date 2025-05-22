@@ -35,6 +35,15 @@ const taskSlice = createSlice({
     removeCompleted: (state) => {
       state.tasks = state.tasks.filter((task) => !task.isCompleted);
     },
+    changeTaskTitle: (state, action) => {
+      const { id, title } = action.payload;
+
+      const task = state.tasks.find((task) => task.id === id);
+
+      if (task) {
+        task.title = title;
+      }
+    },
   },
 });
 
@@ -45,5 +54,6 @@ export const {
   toggleComplete,
   toggleAll,
   removeCompleted,
+  changeTaskTitle,
 } = taskSlice.actions;
 export default taskSlice.reducer;
