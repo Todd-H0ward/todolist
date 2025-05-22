@@ -26,6 +26,25 @@ const TaskItem = ({ task, className }) => {
   const [isEditable, setIsEditable] = useState(false);
   const [taskTitle, setTaskTitle] = useState(task.title);
 
+  const changeTitle = () => {
+    const newTitle = taskTitle.trim();
+
+    if (newTitle) {
+      dispatch(changeTaskTitle({ id: task.id, title: newTitle }));
+    } else {
+      setTaskTitle(task.title);
+    }
+
+    setIsEditable(false);
+  };
+
+  const removeSelection = () => {
+    if (isSelected) {
+      setIsSelected(false);
+      setIsEditable(false);
+    }
+  };
+
   const handleDelete = () => {
     dispatch(removeTask(task.id));
   };
@@ -43,21 +62,12 @@ const TaskItem = ({ task, className }) => {
     setTaskTitle(e.target.value);
   };
 
-  const removeSelection = () => {
-    if (isSelected) {
-      setIsSelected(false);
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
       setIsEditable(false);
+    } else if (e.key === 'Enter') {
+      changeTitle();
     }
-  };
-
-  const changeTitle = () => {
-    const newTitle = taskTitle.trim();
-
-    if (newTitle) {
-      dispatch(changeTaskTitle({ id: task.id, title: newTitle }));
-    }
-
-    setIsEditable(false);
   };
 
   useClickOutside(checkboxRef, removeSelection);
@@ -75,6 +85,7 @@ const TaskItem = ({ task, className }) => {
           value={taskTitle}
           onChange={handleTitleChange}
           onBlur={changeTitle}
+          onKeyDown={handleKeyDown}
           autoFocus
         />
       ) : (
@@ -82,6 +93,7 @@ const TaskItem = ({ task, className }) => {
           className={clsx(styles.title, task.isCompleted && styles.completed)}
           contentEditable={isEditable}
           onDoubleClick={handleTaskDoubleClick}
+          onTouchStart={handleTaskDoubleClick}
           onBlur={changeTitle}
         >
           {task.title}

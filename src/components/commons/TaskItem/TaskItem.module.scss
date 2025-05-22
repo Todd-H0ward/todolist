@@ -28,6 +28,12 @@
       opacity: 1;
     }
   }
+
+  @media (hover: none) {
+    .deleteBtn {
+      opacity: 1;
+    }
+  }
 }
 
 .input {
@@ -40,6 +46,7 @@
 .title {
   padding: 7px;
   flex: 1 1 auto;
+  word-break: break-all;
 
   &[contenteditable='true'] {
     outline: 1px solid var(--accent);

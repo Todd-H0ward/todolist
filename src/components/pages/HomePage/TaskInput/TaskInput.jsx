@@ -1,7 +1,8 @@
+import { clsx } from 'clsx';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Button from 'components/commons/Button/index.js';
+import Button from 'components/commons/Button';
 import Input from 'components/commons/Input';
 import { ChevronDown } from 'components/icons';
 
@@ -12,6 +13,7 @@ import styles from './TaskInput.module.scss';
 const TaskInput = () => {
   const [taskTitle, setTaskTitle] = useState('');
   const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.task.tasks);
 
   const handleTaskTitleChange = (e) => setTaskTitle(e.target.value);
 
@@ -40,7 +42,11 @@ const TaskInput = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Button className={styles.btn} clear onClick={toggleAllTasks}>
+      <Button
+        className={clsx(styles.btn, tasks.length && styles.visible)}
+        onClick={toggleAllTasks}
+        clear
+      >
         <ChevronDown />
       </Button>
       <Input
@@ -48,6 +54,7 @@ const TaskInput = () => {
         value={taskTitle}
         onChange={handleTaskTitleChange}
         onKeyDown={handleKeyDown}
+        onBlur={addNewTask}
         placeholder="What needs to be done?"
         autoFocus
       />
