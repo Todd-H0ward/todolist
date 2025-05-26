@@ -1,12 +1,52 @@
-# React + Vite
+# Todolist
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Todolist — учебное приложение для управления задачами. Позволяет создавать списки дел, редактировать их и применять фильтры.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Стек технологий
 
-## Expanding the ESLint configuration
+- [React](https://reactjs.org/)
+- [Redux-toolkit](https://redux-toolkit.js.org/)
+- [Scss](https://sass-lang.com/)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Как запустить проект
+
+1. Клонируйте репозиторий
+```bash
+git clone https://github.com/Todd-H0ward/todolist.git` 
+cd todolist
+```
+
+2. Установите зависимости
+```bash
+npm install
+# или
+yarn
+```
+
+3. Запустите проект
+```bash
+npm run dev
+# или
+yarn dev
+```
+
+4. Откройте приложение<br>
+   Перейдите по адресу [http://localhost:5173](http://localhost:5173) в браузере, чтобы увидеть результат.
+
+5. Для сборки проекта используйте команду:
+```bash
+npm run build
+# или
+yarn build
+```
+
+6. Для запуска собранного проекта используйте команду:
+```bash
+npm run preview
+# или
+yarn preview
+```

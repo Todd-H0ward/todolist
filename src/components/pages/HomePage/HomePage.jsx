@@ -1,6 +1,6 @@
-import Controls from 'components/pages/HomePage/Controls/index.js';
-import TaskInput from 'components/pages/HomePage/TaskInput/index.js';
-import TasksList from 'components/pages/HomePage/TasksList/index.js';
+import Controls from 'components/pages/HomePage/Controls';
+import TaskInput from 'components/pages/HomePage/TaskInput';
+import TasksList from 'components/pages/HomePage/TasksList';
 
 import styles from './HomePage.module.scss';
 
