@@ -1,6 +1,7 @@
 import { clsx } from 'clsx';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import Button from 'components/commons/Button';
 import Input from 'components/commons/Input';
@@ -24,7 +25,7 @@ const TaskInput = () => {
     if (!newTaskTitle) return;
 
     const newTask = {
-      id: Date.now(),
+      id: uuidv4(),
       title: newTaskTitle,
       isCompleted: false,
     };

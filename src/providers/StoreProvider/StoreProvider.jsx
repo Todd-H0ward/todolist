@@ -1,7 +1,7 @@
+import { TASKS_KEY } from 'constants/storageKeys.js';
+
 import { Provider } from 'react-redux';
 import createStore from 'store';
-
-const TASKS_KEY = 'tasks';
 
 const initialState = localStorage.getItem(TASKS_KEY)
   ? JSON.parse(localStorage.getItem(TASKS_KEY))
