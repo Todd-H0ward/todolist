@@ -14,7 +14,7 @@ import {
   toggleComplete,
 } from 'store/slices/taskSlice.js';
 
-import useClickOutside from 'hooks/useClickOutside.js';
+import { useClickOutside } from 'hooks/useClickOutside.js';
 
 import styles from './TaskItem.module.scss';
 
@@ -36,6 +36,11 @@ const TaskItem = ({ task, className }) => {
     }
 
     setIsEditable(false);
+  };
+
+  const clearIsEditable = () => {
+    setIsEditable(false);
+    setTaskTitle(task.title);
   };
 
   const removeSelection = () => {
@@ -64,7 +69,7 @@ const TaskItem = ({ task, className }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') {
-      setIsEditable(false);
+      clearIsEditable();
     }
 
     if (e.key === 'Enter') {
@@ -86,7 +91,7 @@ const TaskItem = ({ task, className }) => {
           className={styles.input}
           value={taskTitle}
           onChange={handleTitleChange}
-          onBlur={changeTitle}
+          onBlur={clearIsEditable}
           onKeyDown={handleKeyDown}
           autoFocus
         />
@@ -95,7 +100,6 @@ const TaskItem = ({ task, className }) => {
           className={clsx(styles.title, task.isCompleted && styles.completed)}
           onDoubleClick={handleTaskDoubleClick}
           onTouchStart={handleTaskDoubleClick}
-          onBlur={changeTitle}
         >
           {task.title}
         </span>

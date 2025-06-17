@@ -1,45 +1,26 @@
 import { clsx } from 'clsx';
-import { useState } from 'react';
+import { func, string } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 
 import Button from 'components/commons/Button';
 import Input from 'components/commons/Input';
 import { ChevronDown } from 'components/icons';
 
 import { selectTasks } from 'store/selectors/taskSelectors.js';
-import { addTask, toggleAll } from 'store/slices/taskSlice';
+import { toggleAll } from 'store/slices/taskSlice';
 
 import styles from './TaskInput.module.scss';
 
-const TaskInput = () => {
-  const [taskTitle, setTaskTitle] = useState('');
+const TaskInput = ({ value, onChange, addTask }) => {
   const dispatch = useDispatch();
   const tasks = useSelector(selectTasks);
-
-  const handleTaskTitleChange = (e) => setTaskTitle(e.target.value);
-
-  const addNewTask = () => {
-    const newTaskTitle = taskTitle.trim();
-
-    if (!newTaskTitle) return;
-
-    const newTask = {
-      id: uuidv4(),
-      title: newTaskTitle,
-      isCompleted: false,
-    };
-
-    dispatch(addTask(newTask));
-    setTaskTitle('');
-  };
 
   const toggleAllTasks = () => {
     dispatch(toggleAll());
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') addNewTask();
+    if (e.key === 'Enter') addTask();
   };
 
   return (
@@ -53,15 +34,20 @@ const TaskInput = () => {
       </Button>
       <Input
         className={styles.root}
-        value={taskTitle}
-        onChange={handleTaskTitleChange}
+        value={value}
+        onChange={onChange}
         onKeyDown={handleKeyDown}
-        onBlur={addNewTask}
         placeholder="What needs to be done?"
         autoFocus
       />
     </div>
   );
+};
+
+TaskInput.propTypes = {
+  value: string.isRequired,
+  onChange: func.isRequired,
+  addTask: func.isRequired,
 };
 
 export default TaskInput;

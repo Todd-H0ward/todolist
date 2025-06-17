@@ -3,13 +3,17 @@
   width: 100%;
   margin: 0 auto;
   padding: 50px 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 }
 
 .title {
-  align-self: center;
+  margin-bottom: 15px;
+  text-align: center;
   font-size: 52px;
   font-weight: 600;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
