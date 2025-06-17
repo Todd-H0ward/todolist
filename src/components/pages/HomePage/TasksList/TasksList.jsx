@@ -2,24 +2,12 @@ import { useSelector } from 'react-redux';
 
 import TaskItem from 'components/commons/TaskItem';
 
+import { selectFilteredTasks } from 'store/selectors/taskSelectors.js';
+
 import styles from './TasksList.module.scss';
 
 const TasksList = () => {
-  const tasks = useSelector((state) => state.task.tasks);
-  const filter = useSelector((state) => state.task.filter);
-
-  const filteredTasks = tasks.filter((task) => {
-    switch (filter) {
-      case 'all':
-        return true;
-      case 'active':
-        return !task.isCompleted;
-      case 'completed':
-        return task.isCompleted;
-      default:
-        return true;
-    }
-  });
+  const filteredTasks = useSelector(selectFilteredTasks);
 
   if (!filteredTasks.length) {
     return null;
