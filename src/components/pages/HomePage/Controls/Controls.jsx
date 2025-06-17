@@ -1,31 +1,19 @@
+import { FILTERS } from 'constants/filters.js';
+
 import { clsx } from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'components/commons/Button';
 
+import { selectFilters, selectTasks } from 'store/selectors/taskSelectors.js';
 import { removeCompleted, setFilter } from 'store/slices/taskSlice.js';
 
 import styles from './Controls.module.scss';
 
-const FILTERS = [
-  {
-    name: 'All',
-    value: 'all',
-  },
-  {
-    name: 'Active',
-    value: 'active',
-  },
-  {
-    name: 'Completed',
-    value: 'completed',
-  },
-];
-
 const Controls = () => {
+  const tasks = useSelector(selectTasks);
+  const filter = useSelector(selectFilters);
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.task.tasks);
-  const filter = useSelector((state) => state.task.filter);
 
   const activeTasks = tasks.filter((task) => !task.isCompleted);
   const completedTasks = tasks.filter((task) => task.isCompleted);

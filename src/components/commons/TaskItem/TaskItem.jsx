@@ -65,7 +65,9 @@ const TaskItem = ({ task, className }) => {
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') {
       setIsEditable(false);
-    } else if (e.key === 'Enter') {
+    }
+
+    if (e.key === 'Enter') {
       changeTitle();
     }
   };
@@ -91,7 +93,6 @@ const TaskItem = ({ task, className }) => {
       ) : (
         <span
           className={clsx(styles.title, task.isCompleted && styles.completed)}
-          contentEditable={isEditable}
           onDoubleClick={handleTaskDoubleClick}
           onTouchStart={handleTaskDoubleClick}
           onBlur={changeTitle}

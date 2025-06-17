@@ -15,6 +15,7 @@ export default defineConfig({
     alias: {
       components: resolve(__dirname, './src/components'),
       providers: resolve(__dirname, './src/providers'),
+      constants: resolve(__dirname, './src/constants'),
       store: resolve(__dirname, './src/store'),
       styles: resolve(__dirname, './src/styles'),
       hooks: resolve(__dirname, './src/hooks'),
