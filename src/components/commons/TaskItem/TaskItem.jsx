@@ -10,13 +10,11 @@ import { Trash } from 'components/icons';
 
 import {
   selectEditingTaskId,
-  selectIsEditing,
 } from 'store/selectors/taskSelectors.js';
 import {
   changeTaskTitle,
   removeTask,
   setEditingTaskId,
-  setIsEditing,
   toggleComplete,
 } from 'store/slices/taskSlice.js';
 
@@ -26,9 +24,10 @@ import styles from './TaskItem.module.scss';
 
 const TaskItem = ({ task, className }) => {
   const dispatch = useDispatch();
-  const checkboxRef = useRef(null);
   const editingTaskId = useSelector(selectEditingTaskId);
-  const isEditing = useSelector(selectIsEditing);
+
+  const checkboxRef = useRef(null);
+  const inputRef = useRef(null);
 
   const [isSelected, setIsSelected] = useState(false);
   const [taskTitle, setTaskTitle] = useState(task.title);
@@ -74,7 +73,6 @@ const TaskItem = ({ task, className }) => {
 
   const handleTitleChange = (e) => {
     setTaskTitle(e.target.value);
-    dispatch(setIsEditing(true));
   };
 
   const handleKeyDown = (e) => {
@@ -88,6 +86,7 @@ const TaskItem = ({ task, className }) => {
   };
 
   useClickOutside(checkboxRef, removeSelection);
+  useClickOutside(inputRef, clearIsEditable, true);
 
   return (
     <li className={clsx(styles.root, isSelected && styles.selected, className)}>
@@ -98,10 +97,10 @@ const TaskItem = ({ task, className }) => {
       />
       {isEditable ? (
         <Input
+          ref={inputRef}
           className={styles.input}
           value={taskTitle}
           onChange={handleTitleChange}
-          onBlur={clearIsEditable}
           onKeyDown={handleKeyDown}
           autoFocus
         />

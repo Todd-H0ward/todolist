@@ -3,7 +3,6 @@ import { createSelector } from '@reduxjs/toolkit';
 export const selectTasks = (state) => state.task.tasks;
 export const selectFilters = (state) => state.task.filter;
 export const selectEditingTaskId = (state) => state.task.editingTaskId;
-export const selectIsEditing = (state) => state.task.isEditing;
 
 export const selectFilteredTasks = createSelector(
   [selectTasks, selectFilters],

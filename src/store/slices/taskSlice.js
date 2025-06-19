@@ -4,7 +4,6 @@ const initialState = {
   tasks: [],
   filter: 'all',
   editingTaskId: null,
-  isEditing: false,
 };
 
 const taskSlice = createSlice({
@@ -16,9 +15,6 @@ const taskSlice = createSlice({
     },
     setEditingTaskId: (state, action) => {
       state.editingTaskId = action.payload;
-    },
-    setIsEditing: (state, action) => {
-      state.isEditing = action.payload;
     },
     addTask: (state, action) => {
       state.tasks.push(action.payload);
@@ -56,7 +52,6 @@ const taskSlice = createSlice({
 export const {
   setFilter,
   setEditingTaskId,
-  setIsEditing,
   addTask,
   removeTask,
   toggleComplete,
