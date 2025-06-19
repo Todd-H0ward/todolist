@@ -1,12 +1,16 @@
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import Controls from 'components/pages/HomePage/Controls';
 import TaskInput from 'components/pages/HomePage/TaskInput';
 import TasksList from 'components/pages/HomePage/TasksList';
 
-import { addTask } from 'store/slices/taskSlice.js';
+import {
+  selectEditingTaskId,
+  selectIsEditing,
+} from 'store/selectors/taskSelectors.js';
+import { addTask, setIsEditing } from 'store/slices/taskSlice.js';
 
 import { useClickOutside } from 'hooks/useClickOutside.js';
 
@@ -16,11 +20,17 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const [taskTitle, setTaskTitle] = useState('');
+  const isEditing = useSelector(selectIsEditing);
 
   const handleTaskTitleChange = (e) => setTaskTitle(e.target.value);
 
   const addNewTask = () => {
     const newTaskTitle = taskTitle.trim();
+
+    if (isEditing) {
+      dispatch(setIsEditing(false));
+      return;
+    }
 
     if (!newTaskTitle) return;
 

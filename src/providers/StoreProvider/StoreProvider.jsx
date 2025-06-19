@@ -11,6 +11,8 @@ const store = createStore({
   task: {
     tasks: initialState,
     filter: 'all',
+    editingTaskId: null,
+    isEditing: false,
   },
 });
 

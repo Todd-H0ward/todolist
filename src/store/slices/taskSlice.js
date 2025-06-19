@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   tasks: [],
   filter: 'all',
+  editingTaskId: null,
+  isEditing: false,
 };
 
 const taskSlice = createSlice({
@@ -11,6 +13,12 @@ const taskSlice = createSlice({
   reducers: {
     setFilter: (state, action) => {
       state.filter = action.payload;
+    },
+    setEditingTaskId: (state, action) => {
+      state.editingTaskId = action.payload;
+    },
+    setIsEditing: (state, action) => {
+      state.isEditing = action.payload;
     },
     addTask: (state, action) => {
       state.tasks.push(action.payload);
@@ -36,12 +44,10 @@ const taskSlice = createSlice({
       state.tasks = state.tasks.filter((task) => !task.isCompleted);
     },
     changeTaskTitle: (state, action) => {
-      const { id, title } = action.payload;
-
-      const task = state.tasks.find((task) => task.id === id);
+      const task = state.tasks.find((task) => task.id === state.editingTaskId);
 
       if (task) {
-        task.title = title;
+        task.title = action.payload;
       }
     },
   },
@@ -49,6 +55,8 @@ const taskSlice = createSlice({
 
 export const {
   setFilter,
+  setEditingTaskId,
+  setIsEditing,
   addTask,
   removeTask,
   toggleComplete,

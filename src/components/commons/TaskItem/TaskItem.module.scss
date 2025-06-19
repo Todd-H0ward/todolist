@@ -50,8 +50,8 @@
   word-break: break-all;
 
   &.completed {
-    text-decoration: line-through;
     color: #b1b1b1;
+    text-decoration: line-through;
   }
 }
 

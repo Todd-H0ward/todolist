@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import { shape, string, bool } from 'prop-types';
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'components/commons/Button';
 import Checkbox from 'components/commons/Checkbox';
@@ -9,8 +9,14 @@ import Input from 'components/commons/Input';
 import { Trash } from 'components/icons';
 
 import {
+  selectEditingTaskId,
+  selectIsEditing,
+} from 'store/selectors/taskSelectors.js';
+import {
   changeTaskTitle,
   removeTask,
+  setEditingTaskId,
+  setIsEditing,
   toggleComplete,
 } from 'store/slices/taskSlice.js';
 
@@ -21,32 +27,35 @@ import styles from './TaskItem.module.scss';
 const TaskItem = ({ task, className }) => {
   const dispatch = useDispatch();
   const checkboxRef = useRef(null);
+  const editingTaskId = useSelector(selectEditingTaskId);
+  const isEditing = useSelector(selectIsEditing);
 
   const [isSelected, setIsSelected] = useState(false);
-  const [isEditable, setIsEditable] = useState(false);
   const [taskTitle, setTaskTitle] = useState(task.title);
+
+  const isEditable = editingTaskId === task.id;
 
   const changeTitle = () => {
     const newTitle = taskTitle.trim();
 
     if (newTitle) {
-      dispatch(changeTaskTitle({ id: task.id, title: newTitle }));
+      dispatch(changeTaskTitle(newTitle));
     } else {
       setTaskTitle(task.title);
     }
 
-    setIsEditable(false);
+    dispatch(setEditingTaskId(null));
   };
 
   const clearIsEditable = () => {
-    setIsEditable(false);
     setTaskTitle(task.title);
+    dispatch(setEditingTaskId(null));
   };
 
   const removeSelection = () => {
     if (isSelected) {
       setIsSelected(false);
-      setIsEditable(false);
+      dispatch(setEditingTaskId(null));
     }
   };
 
@@ -60,11 +69,12 @@ const TaskItem = ({ task, className }) => {
   };
 
   const handleTaskDoubleClick = () => {
-    setIsEditable(true);
+    dispatch(setEditingTaskId(task.id));
   };
 
   const handleTitleChange = (e) => {
     setTaskTitle(e.target.value);
+    dispatch(setIsEditing(true));
   };
 
   const handleKeyDown = (e) => {
