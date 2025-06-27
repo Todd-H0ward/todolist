@@ -9,7 +9,7 @@ import { ChevronDown } from 'components/icons';
 import { selectTasks } from 'store/selectors/taskSelectors.js';
 import { toggleAll } from 'store/slices/taskSlice';
 
-import styles from './TaskInput.module.scss';
+import s from './TaskInput.module.scss';
 
 const TaskInput = ({ value, onChange, addTask }) => {
   const dispatch = useDispatch();
@@ -24,16 +24,16 @@ const TaskInput = ({ value, onChange, addTask }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={s.root}>
       <Button
-        className={clsx(styles.btn, tasks.length && styles.visible)}
+        className={clsx(s.btn, tasks.length && s.visible)}
         onClick={toggleAllTasks}
         clear
       >
         <ChevronDown />
       </Button>
       <Input
-        className={styles.root}
+        className={s.input}
         value={value}
         onChange={onChange}
         onKeyDown={handleKeyDown}

@@ -8,10 +8,9 @@ import TasksList from 'components/pages/HomePage/TasksList';
 
 import { addTask } from 'store/slices/taskSlice.js';
 
-
 import { useClickOutside } from 'hooks/useClickOutside.js';
 
-import styles from './HomePage.module.scss';
+import s from './HomePage.module.scss';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -38,9 +37,9 @@ const HomePage = () => {
   useClickOutside(formRef, addNewTask);
 
   return (
-    <div className={styles.root}>
-      <h1 className={styles.title}>Todos</h1>
-      <div className={styles.form} ref={formRef}>
+    <div className={s.root}>
+      <h1 className={s.title}>Todos</h1>
+      <div className={s.form} ref={formRef}>
         <TaskInput
           value={taskTitle}
           onChange={handleTaskTitleChange}

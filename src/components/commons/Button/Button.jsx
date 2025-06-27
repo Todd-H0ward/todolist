@@ -1,12 +1,12 @@
 import { clsx } from 'clsx';
 import { bool, func, node, string } from 'prop-types';
 
-import styles from './Button.module.scss';
+import s from './Button.module.scss';
 
 const Button = ({ onClick, clear, children, className, ...props }) => {
   return (
     <button
-      className={clsx(styles.root, clear && styles.clear, className)}
+      className={clsx(s.root, clear && s.clear, className)}
       onClick={onClick}
       {...props}
     >

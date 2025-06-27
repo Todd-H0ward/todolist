@@ -4,7 +4,7 @@ import TaskItem from 'components/commons/TaskItem';
 
 import { selectFilteredTasks } from 'store/selectors/taskSelectors.js';
 
-import styles from './TasksList.module.scss';
+import s from './TasksList.module.scss';
 
 const TasksList = () => {
   const filteredTasks = useSelector(selectFilteredTasks);
@@ -14,7 +14,7 @@ const TasksList = () => {
   }
 
   return (
-    <ul className={styles.root}>
+    <ul className={s.root}>
       {filteredTasks.map((task) => (
         <TaskItem key={task.id} task={task} />
       ))}

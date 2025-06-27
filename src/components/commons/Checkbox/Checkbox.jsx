@@ -2,23 +2,23 @@ import { clsx } from 'clsx';
 import { bool, func, string } from 'prop-types';
 import { forwardRef } from 'react';
 
-import { Arrow } from 'components/icons/index.js';
+import { Arrow } from 'components/icons';
 
-import styles from './Checkbox.module.scss';
+import s from './Checkbox.module.scss';
 
 const Checkbox = forwardRef(
   ({ checked, onChange, className, ...props }, ref) => {
     return (
-      <div className={styles.wrapper}>
+      <div className={s.root}>
         <input
           ref={ref}
-          className={clsx(styles.root, className)}
+          className={clsx(s.input, className)}
           type="checkbox"
           checked={checked}
           onChange={onChange}
           {...props}
         />
-        <Arrow className={clsx(styles.icon, checked && styles.visible)} />
+        <Arrow className={clsx(s.icon, checked && s.visible)} />
       </div>
     );
   },

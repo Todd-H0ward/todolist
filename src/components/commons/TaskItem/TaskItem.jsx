@@ -20,7 +20,7 @@ import {
 
 import { useClickOutside } from 'hooks/useClickOutside.js';
 
-import styles from './TaskItem.module.scss';
+import s from './TaskItem.module.scss';
 
 const TaskItem = ({ task, className }) => {
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ const TaskItem = ({ task, className }) => {
   useClickOutside(inputRef, clearIsEditable, true);
 
   return (
-    <li className={clsx(styles.root, isSelected && styles.selected, className)}>
+    <li className={clsx(s.root, isSelected && s.selected, className)}>
       <Checkbox
         checked={task.isCompleted}
         onChange={handleTaskClick}
@@ -98,7 +98,7 @@ const TaskItem = ({ task, className }) => {
       {isEditable ? (
         <Input
           ref={inputRef}
-          className={styles.input}
+          className={s.input}
           value={taskTitle}
           onChange={handleTitleChange}
           onKeyDown={handleKeyDown}
@@ -106,14 +106,14 @@ const TaskItem = ({ task, className }) => {
         />
       ) : (
         <span
-          className={clsx(styles.title, task.isCompleted && styles.completed)}
+          className={clsx(s.title, task.isCompleted && s.completed)}
           onDoubleClick={handleTaskDoubleClick}
           onTouchStart={handleTaskDoubleClick}
         >
           {task.title}
         </span>
       )}
-      <Button className={styles.deleteBtn} clear onClick={handleDelete}>
+      <Button className={s.deleteBtn} clear onClick={handleDelete}>
         <Trash />
       </Button>
     </li>

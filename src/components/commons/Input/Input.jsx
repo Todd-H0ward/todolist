@@ -2,13 +2,13 @@ import { clsx } from 'clsx';
 import { string, func } from 'prop-types';
 import {forwardRef} from "react";
 
-import styles from './Input.module.scss';
+import s from './Input.module.scss';
 
 const Input = forwardRef(({ value, onChange, className, ...props }, ref) => {
   return (
     <input
       ref={ref}
-      className={clsx(styles.root, className)}
+      className={clsx(s.root, className)}
       value={value}
       onChange={onChange}
       {...props}
